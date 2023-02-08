@@ -86,7 +86,8 @@ jobs:
           cat all-apps.json
           DEPLOYED_APPS_COUNT=`cat all-apps.json | jq '.items | length'`
           echo "DEPLOYED_APPS_COUNT = $DEPLOYED_APPS_COUNT"
-          OLDEST_PR=`curl https://api.github.com/search/issues?q=is:pr%20is:open%20repo:fermyon/developer&sort=updated&order=asc | jq '.items[0].number'`
+          curl https://api.github.com/search/issues?q=is:pr%20is:open%20repo:fermyon/developer&sort=updated&order=asc > prs.json
+          OLDEST_PR=`cat prs.json| jq '.items[0].number'`
           echo "OLDEST_PR: $OLDEST_PR"
           
       # - name: Spin Deploy
