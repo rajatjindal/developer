@@ -13,7 +13,7 @@ jobs:
       gh_password: ${{ secrets.DEV_DOCS_PREVIEW_GH_PASSWORD }}
       gh_totp_secret: ${{ secrets.DEV_DOCS_PREVIEW_GH_TOTP_SECRET }}        
 
-  preview:
+  deploy-preview:
     runs-on: "ubuntu-latest"
     needs: cloud-login
     steps:
