@@ -6,15 +6,13 @@ on:
 jobs:
   cloud-login:
     runs-on: "ubuntu-latest"
-    steps:
-    - uses: "fermyon/actions/.github/workflows/auth.yml@main"
-      with:
-        secrets:
-          gh_username: ${{ secrets.DEV_DOCS_PREVIEW_GH_USERNAME }}
-          gh_password: ${{ secrets.DEV_DOCS_PREVIEW_GH_PASSWORD }}
-          gh_totp_secret: ${{ secrets.DEV_DOCS_PREVIEW_GH_TOTP_SECRET }}
-        inputs:
-          fermyon_deployment_env: developer-docs-preview
+    uses: "fermyon/actions/.github/workflows/auth.yml@main"
+    with:
+      fermyon_deployment_env: developer-docs-preview
+    secrets:
+      gh_username: ${{ secrets.DEV_DOCS_PREVIEW_GH_USERNAME }}
+      gh_password: ${{ secrets.DEV_DOCS_PREVIEW_GH_PASSWORD }}
+      gh_totp_secret: ${{ secrets.DEV_DOCS_PREVIEW_GH_TOTP_SECRET }}        
 
   preview:
     runs-on: "ubuntu-latest"
