@@ -8,7 +8,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: setup spin pls
-        uses: rajatjindal/setup-spin@main
+        uses: rajatjindal/setup-bindle@main
         with:
           version: v0.8.0
   
@@ -16,7 +16,7 @@ jobs:
     runs-on: "windows-latest"
     steps:
       - name: setup spin pls
-        uses: rajatjindal/setup-spin@main
+        uses: rajatjindal/setup-bindle@main
         with:
           version: v0.8.0
 
@@ -24,6 +24,6 @@ jobs:
     runs-on: "macos-latest"
     steps:
       - name: setup spin pls
-        uses: rajatjindal/setup-spin@main
+        uses: rajatjindal/setup-bindle@main
         with:
           version: v0.8.0
