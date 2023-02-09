@@ -5,7 +5,6 @@ on:
 
 jobs:
   cloud-login:
-    runs-on: "ubuntu-latest"
     uses: "fermyon/actions/.github/workflows/auth.yml@main"
     with:
       fermyon_deployment_env: developer-docs-preview
