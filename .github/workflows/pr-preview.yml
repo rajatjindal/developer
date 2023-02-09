@@ -19,7 +19,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Retrieve saved cloud token
+        uses: actions/download-artifact@v3
+        with:
+          name: developer-docs-preview.json
+          path: /home/runner/.config/fermyon/
+
       - name: Deploy preview on cloud
-        uses: rajatjindal/fermyon-cloud-preview@v0.0.6
+        uses: rajatjindal/fermyon-cloud-preview@v0.0.7
         with:
           fermyon_deployment_env: developer-docs-preview
