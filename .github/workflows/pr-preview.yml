@@ -28,11 +28,14 @@ jobs:
           path: /home/runner/work/developer/
 
       - name: Deploy preview on cloud
-        uses: rajatjindal/fermyon-cloud-preview@v0.0.8
+        uses: rajatjindal/fermyon-cloud-preview@v0.0.7
         with:
           fermyon_deployment_env: developer-docs-preview
 
-      - uses: geekyeggo/delete-artifact@v2
-        if: always()
-        with:
-          name: developer-docs-preview.json
+  cleanup: 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: geekyeggo/delete-artifact@v2
+      if: always()
+      with:
+        name: developer-docs-preview.json
