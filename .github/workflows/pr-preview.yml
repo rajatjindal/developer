@@ -5,7 +5,7 @@ on:
 
 jobs:
   cloud-login:
-    uses: "fermyon/actions/.github/workflows/auth.yml@main"
+    uses: "rajatjindal/actions/.github/workflows/auth.yml@fix-auth2"
     with:
       fermyon_deployment_env: developer-docs-preview
     secrets:
