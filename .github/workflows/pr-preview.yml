@@ -3,41 +3,27 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  cloud-login:
-    uses: "rajatjindal/actions/.github/workflows/auth.yml@fix-auth2"
-    with:
-      fermyon_deployment_env: developer-docs-preview
-    secrets:
-      gh_username: ${{ secrets.DEV_DOCS_PREVIEW_GH_USERNAME }}
-      gh_password: ${{ secrets.DEV_DOCS_PREVIEW_GH_PASSWORD }}
-      gh_totp_secret: ${{ secrets.DEV_DOCS_PREVIEW_GH_TOTP_SECRET }}        
-
+jobs: 
   deploy-preview:
     runs-on: "ubuntu-latest"
-    needs: cloud-login
     steps:
-      - uses: actions/checkout@v3
-
-      - run: pwd && ls -ltr
-
-      - name: Retrieve saved cloud token
-        uses: actions/download-artifact@v3
+      - name: setup spin pls
+        uses: rajatjindal/setup-spin@main
         with:
-          name: developer-docs-preview.json
-          path: ${{ env.GITHUB_WORKSPACE }}
-
-      - name: Deploy preview on cloud
-        uses: rajatjindal/fermyon-cloud-preview@v0.0.7
-        with:
-          fermyon_deployment_env: developer-docs-preview
-
-  cleanup: 
-    runs-on: ubuntu-latest
-    needs: [deploy-preview]
-    if: always()
+          version: v0.8.0
+  
+  deploy-preview-2:
+    runs-on: "windows-latest"
     steps:
-    - uses: geekyeggo/delete-artifact@v2
-      if: always()
-      with:
-        name: developer-docs-preview.json
+      - name: setup spin pls
+        uses: rajatjindal/setup-spin@main
+        with:
+          version: v0.8.0
+
+  deploy-preview-3:
+    runs-on: "macos-latest"
+    steps:
+      - name: setup spin pls
+        uses: rajatjindal/setup-spin@main
+        with:
+          version: v0.8.0
