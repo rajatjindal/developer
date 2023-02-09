@@ -27,3 +27,4 @@ Once you edit the website, please run the tests and make sure to fix the errors.
 npm ci
 npm test
 ```
+
