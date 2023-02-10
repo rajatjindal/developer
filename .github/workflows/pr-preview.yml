@@ -14,3 +14,13 @@ jobs:
           version: v0.8.0
       - name: check version
         run: spin --version
+
+    ## works same on macos and windows too
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: setup spin pls
+        uses: rajatjindal/setup-spin@main
+        with:
+          version: v0.8.0
+      - name: check version
+        run: spin --version
