@@ -1,43 +1,108 @@
 name: Build
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [preview2]
 
 jobs:
-  build:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v2
+  # build:
+  #   runs-on: "ubuntu-latest"
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Install spin
-        uses: engineerd/configurator@v0.0.8
-        with:
-          name: "spin"
-          url: "https://github.com/fermyon/spin/releases/download/v0.6.0/spin-v0.6.0-linux-amd64.tar.gz"
-          pathInArchive: "spin"
+  #     - name: Install spin
+  #       uses: engineerd/configurator@v0.0.9
+  #       with:
+  #         name: "spin"
+  #         url: "https://github.com/fermyon/spin/releases/download/v0.8.0/spin-v0.8.0-linux-amd64.tar.gz"
+  #         pathInArchive: "spin"
 
-      - name: Install npm packages
-        run: |
-          npm ci
+  #     - name: Install npm packages
+  #       run: |
+  #         npm ci
 
-      - name: Run npm tests
-        run: |
-          npm test
+  #     - name: Run npm tests
+  #       run: |
+  #         npm test
 
-      - name: Install bart
-        run: |
-          curl -LOs https://github.com/fermyon/bartholomew/releases/download/v0.3.0/bart
-          chmod +x bart
-          mv bart /usr/local/bin
+  #     - name: Install bart
+  #       run: |
+  #         curl -LOs https://github.com/fermyon/bartholomew/releases/download/v0.3.0/bart
+  #         chmod +x bart
+  #         mv bart /usr/local/bin
 
-      - name: Check Docs
-        run: |
-          bart check content/* && bart check content/**/*
+  #     - name: Check Docs
+  #       run: |
+  #         bart check content/* && bart check content/**/*
 
+  # cloud-login:
+  #   uses: "fermyon/actions/.github/workflows/auth.yml@main"
+  #   secrets:
+  #     gh_username: ${{ secrets.DEV_DOCS_PREVIEW_GH_USERNAME }}
+  #     gh_password: ${{ secrets.DEV_DOCS_PREVIEW_GH_PASSWORD }}
+  #     gh_totp_secret: ${{ secrets.DEV_DOCS_PREVIEW_GH_TOTP_SECRET }}
+  #   inputs:
+  #     fermyon_deployment_env: developer-docs-preview
+
+  # preview:
+  #   runs-on: "ubuntu-latest"
+  #   # needs: [build, cloud-login]
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+      # - name: Install spin
+      #   uses: engineerd/configurator@v0.0.8
+      #   with:
+      #     name: "spin"
+      #     url: "https://github.com/fermyon/spin/releases/download/v0.8.0/spin-v0.8.0-linux-amd64.tar.gz"
+      #     pathInArchive: "spin"
+
+      # - name: fake token
+      #   run: |
+      #     mkdir -p /home/runner/.config/fermyon/
+      #     echo "hello" > /home/runner/.config/fermyon/developer-docs-preview.json
+      #     cat  /home/runner/.config/fermyon/developer-docs-preview.json
+      #     echo '{"danger_accept_invalid_certs": false, "url": "https://cloud.fermyon.com/", "expiration": "2023-05-12T05:19:10Z", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNmFhNTRhMC1kZWQ2LTQ3OWMtODNhYi05ZjRjZTM5ZDJhNzQiLCJ1bmlxdWVfbmFtZSI6ImE2YWE1NGEwLWRlZDYtNDc5Yy04M2FiLTlmNGNlMzlkMmE3NCIsImp0aSI6IjVmMWQ2YzlkLTJhZWEtNDE4YS04NGE4LTRlMTdlMzQzY2NmYSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiYTZhYTU0YTAtZGVkNi00NzljLTgzYWItOWY0Y2UzOWQyYTc0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRnJlZVRpZXIiLCJleHAiOjE2NzY0Mjk1NDksImlzcyI6ImNsb3VkLmZlcm15b24uY29tIiwiYXVkIjoiY2xvdWQuZmVybXlvbi5jb20ifQ.1SA_s3XUR60VHVkskN2HBphITijTRi8I9EO0tEQnUnI"}' > /home/runner/.config/fermyon/developer-docs-preview.json
+      #     cat /home/runner/.config/fermyon/developer-docs-preview.json
+
+      # - name: Retrieve saved cloud token
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: developer-docs-preview.json
+      #     path: /home/runner/.config/fermyon/
+
+
+
+
+      # check if # of apps > 5, delete the oldest
+      # - name: Delete oldest deployment preview
+      #   run: |
+      #     FERMYON_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNmFhNTRhMC1kZWQ2LTQ3OWMtODNhYi05ZjRjZTM5ZDJhNzQiLCJ1bmlxdWVfbmFtZSI6ImE2YWE1NGEwLWRlZDYtNDc5Yy04M2FiLTlmNGNlMzlkMmE3NCIsImp0aSI6IjVmMWQ2YzlkLTJhZWEtNDE4YS04NGE4LTRlMTdlMzQzY2NmYSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiYTZhYTU0YTAtZGVkNi00NzljLTgzYWItOWY0Y2UzOWQyYTc0IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRnJlZVRpZXIiLCJleHAiOjE2NzY0Mjk1NDksImlzcyI6ImNsb3VkLmZlcm15b24uY29tIiwiYXVkIjoiY2xvdWQuZmVybXlvbi5jb20ifQ.1SA_s3XUR60VHVkskN2HBphITijTRi8I9EO0tEQnUnI
+      #     curl -vXGET 'https://cloud.fermyon.com/api/apps/' -H"Authorization: Bearer $FERMYON_TOKEN" > all-apps.json
+      #     cat all-apps.json
+      #     DEPLOYED_APPS_COUNT=`cat all-apps.json | jq '.items | length'`
+      #     echo "DEPLOYED_APPS_COUNT = $DEPLOYED_APPS_COUNT"
+      #     curl https://api.github.com/search/issues?q=is:pr%20is:open%20repo:fermyon/developer&sort=updated&order=asc > prs.json
+      #     OLDEST_PR=`cat prs.json| jq '.items[0].number'`
+      #     echo "OLDEST_PR: $OLDEST_PR"
+          
+      # - name: Spin Deploy
+      #   run: |
+      #     perl -i -pe "s/name = \"fermyon-developer\"/name = \"fermyon-developer-pr-${{ github.event.pull_request.number || 'pr-test' }}\"/g" spin.toml
+      #     cat spin.toml
+      #     FERMYON_DEPLOYMENT_ENVIRONMENT=developer-docs-preview spin deploy | tee deploy.log
+
+      #     PREVIEW_URL=`cat deploy.log | grep bartholomew | grep http | grep wildcard | awk '{print $2}'`
+      #     echo $PREVIEW_URL
+      #     echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
+          
+      # - name: Create comment
+      #   uses: peter-evans/create-or-update-comment@v2
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body: |
+      #       Your preview is available at ${{ env.PREVIEW_URL }}

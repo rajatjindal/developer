@@ -1,0 +1,40 @@
+name: Setup spin
+on:
+  pull_request:
+    branches: [main]
+
+jobs: 
+  # setup-spin-windows:
+  #   ## works same on macos and windows too
+  #   runs-on: "windows-latest"
+  #   steps:
+  #     - name: setup spin
+  #       uses: rajatjindal/setup-spin@main
+  #       with:
+  #         version: v0.7.0
+  #     - name: check version
+  #       run: |
+  #         dir C:\Users\runneradmin\runneradmin\downloader\bin\
+  #         C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
+
+  setup-spin-ubuntu:
+    ## works same on macos and windows too
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: setup spin pls
+        uses: rajatjindal/setup-actions/spin@main
+        with:
+          version: v0.8.0
+      - name: check version
+        run: spin --version
+
+  # setup-spin-macos:
+  #   ## works same on macos and windows too
+  #   runs-on: "macos-latest"
+  #   steps:
+  #     - name: setup spin pls
+  #       uses: rajatjindal/setup-spin@main
+  #       with:
+  #         version: v0.8.0
+  #     - name: check version
+  #       run: spin --version
