@@ -24,4 +24,4 @@ jobs:
         with:
           version: v0.8.0
       - name: check version
-        run: spin --version
+        run: C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
