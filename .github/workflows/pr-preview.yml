@@ -13,7 +13,7 @@ jobs:
         with:
           version: v0.7.0
       - name: check version
-        run: spin --version
+        run: C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
 
   setup-spin-ubuntu:
     ## works same on macos and windows too
@@ -24,4 +24,4 @@ jobs:
         with:
           version: v0.8.0
       - name: check version
-        run: C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
+        run: spin --version
