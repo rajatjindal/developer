@@ -4,7 +4,7 @@ on:
     branches: [main]
 
 jobs: 
-  setup-spin-ubuntu:
+  setup-spin-windows:
     ## works same on macos and windows too
     runs-on: "windows-latest"
     steps:
@@ -15,7 +15,7 @@ jobs:
       - name: check version
         run: spin --version
 
-  setup-spin-windows:
+  setup-spin-ubuntu:
     ## works same on macos and windows too
     runs-on: "ubuntu-latest"
     steps:
