@@ -15,6 +15,7 @@ jobs:
       - name: check version
         run: spin --version
 
+  setup-spin-windows:
     ## works same on macos and windows too
     runs-on: "ubuntu-latest"
     steps:
