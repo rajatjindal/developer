@@ -1,29 +1,16 @@
-name: Deploy preview of developer docs
+name: Setup spin
 on:
   pull_request:
     branches: [main]
 
 jobs: 
-  deploy-preview:
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: setup spin pls
-        uses: rajatjindal/setup-bindle@main
-        with:
-          version: v0.8.0
-  
-  deploy-preview-2:
+  setup-spin:
+    ## works same on macos and windows too
     runs-on: "windows-latest"
     steps:
       - name: setup spin pls
-        uses: rajatjindal/setup-bindle@main
+        uses: rajatjindal/setup-spin@main
         with:
           version: v0.8.0
-
-  deploy-preview-3:
-    runs-on: "macos-latest"
-    steps:
-      - name: setup spin pls
-        uses: rajatjindal/setup-bindle@main
-        with:
-          version: v0.8.0
+      - name: check version
+        run: spin --version
