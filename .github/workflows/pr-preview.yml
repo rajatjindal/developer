@@ -4,7 +4,7 @@ on:
     branches: [main]
 
 jobs: 
-  setup-spin:
+  setup-spin-ubuntu:
     ## works same on macos and windows too
     runs-on: "windows-latest"
     steps:
