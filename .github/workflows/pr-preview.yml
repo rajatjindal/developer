@@ -13,7 +13,10 @@ jobs:
         with:
           version: v0.7.0
       - name: check version
-        run: C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
+        run: |
+          dir C:\Users\runneradmin\runneradmin\downloader\bin\
+          C:\Users\runneradmin\runneradmin\downloader\bin\spin.exe --version
+          C:\Users\runneradmin\runneradmin\downloader\bin\spin --version
 
   setup-spin-ubuntu:
     ## works same on macos and windows too
