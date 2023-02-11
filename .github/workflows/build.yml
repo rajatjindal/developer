@@ -25,11 +25,10 @@ jobs:
           name: developer-docs-preview.json
           path: ${{ env.GITHUB_WORKSPACE }}
 
-      - run: pwd && ls -ltr $GITHUB_WORKSPACE
       - name: Deploy preview on cloud
         uses: rajatjindal/some-action@main
         with:
-          github_token: $GITHUB_TOKEN
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           fermyon_token_file_name: "developer-docs-preview.json"
 
   cleanup: 
