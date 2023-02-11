@@ -25,6 +25,7 @@ jobs:
           name: developer-docs-preview.json
           path: ${{ env.GITHUB_WORKSPACE }}
 
+      - run: echo "workspace is ${{ env.GITHUB_WORKSPACE }}"
       - name: Deploy preview on cloud
         uses: rajatjindal/some-action@main
 
