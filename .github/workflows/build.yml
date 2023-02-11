@@ -35,7 +35,7 @@ jobs:
         uses: rajatjindal/some-action@main
         with:
           github_token: $GITHUB_TOKEN
-          fermyon_token_file: "$GITHUB_WORKSPACE/developer-docs-preview.json"
+          fermyon_token_file: "${GITHUB_WORKSPACE}/developer-docs-preview.json"
 
   cleanup: 
     runs-on: ubuntu-latest
