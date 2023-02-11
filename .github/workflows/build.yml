@@ -26,6 +26,7 @@ jobs:
           path: ${{ env.GITHUB_WORKSPACE }}
 
       - run: echo "workspace is $GITHUB_WORKSPACE"
+      - run: pwd && ls -ltr $GITHUB_WORKSPACE
       - name: Deploy preview on cloud
         uses: rajatjindal/some-action@main
 
