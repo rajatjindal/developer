@@ -1,0 +1,18 @@
+name: Deploy Preview
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy-preview:
+    if: ${{ github.repository_owner == 'fermyon' }}
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy PR preview to Fermyon Cloud
+        uses: rajatjindal/fermyon-cloud/pr-preview@main
+        with:
+          fermyon_token: ${{ secrets.FERMYON_CLOUD_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
