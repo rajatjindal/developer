@@ -3,10 +3,12 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
+  issue_comment:                                     
+    types: [created, edited]
 
 jobs:
   deploy-preview:
-    if: ${{ github.repository_owner == 'fermyon' }}
+    if: ${{ github.repository_owner == 'fermyon' }} && (github.event_name != 'issue_comment || (github.event.issue.pull_request && contains(github.event.comment.body, '/re-deploy')))
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
