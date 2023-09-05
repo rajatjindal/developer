@@ -147,39 +147,8 @@ The Python SDK doesn't currently surface the Serverless AI API.
 
 {{ startTab "TinyGo"}}
 
-Serverless AI functions are available in the `github.com/fermyon/spin/sdk/go/llm` package. See [Go Packages](https://pkg.go.dev/github.com/fermyon/spin/sdk/go/llm) for reference documentation. For example:
+The Go SDK doesn't currently surface the Serverless AI API. 
 
-```go
-package main
-
-import (
-	"fmt"
-	"net/http"
-
-	spinhttp "github.com/fermyon/spin/sdk/go/http"
-	"github.com/fermyon/spin/sdk/go/llm"
-)
-
-func init() {
-	spinhttp.Handle(func(w http.ResponseWriter, r *http.Request) {
-		result, err := llm.Infer("llama2-chat", "What is a good prompt?", nil)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		fmt.Printf("Prompt tokens:    %d\n", result.Usage.PromptTokenCount)
-		fmt.Printf("Generated tokens: %d\n", result.Usage.GeneratedTokenCount)
-		fmt.Fprintf(w, "%s\n", result.Text)
-
-		embeddings, err := llm.GenerateEmbeddings("all-minilm-l6-v2", []string{"Hello world"})
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		fmt.Printf("Prompt Tokens: %d\n", embeddings.Usage.PromptTokenCount)
-		fmt.Printf("%v\n", embeddings.Embeddings)
-	})
-}
 ```
 
 **General Notes**
